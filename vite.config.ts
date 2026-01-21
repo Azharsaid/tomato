@@ -1,13 +1,16 @@
 import path from 'path';
+import { fileURLToPath } from 'url'; // New import needed
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+
+// Fix for "__dirname is not defined" error
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
-        // THIS IS THE NEW LINE FOR GITHUB PAGES:
-        base: '/tomato/',
-
+        base: '/tomato/', // Required for GitHub Pages
         server: {
             port: 3000,
             host: '0.0.0.0',
